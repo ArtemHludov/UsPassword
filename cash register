@@ -1,0 +1,19 @@
+Console.WriteLine("What is the amount of the purchase?");
+
+double PurhesePrice = Convert.ToDouble(Console.ReadLine());
+
+Console.WriteLine("How much money the buyer gave?");
+
+double BuyersMoney = Convert.ToDouble(Console.ReadLine());
+
+double result = BuyersMoney - PurhesePrice;
+
+if (result >= 0)
+{
+    Console.WriteLine("Your Change = " + result + '$');
+}
+
+else
+{
+    Console.WriteLine("not enough " + (result *= -1) + '$');
+}
