@@ -1,0 +1,365 @@
+/* Условие задачи
+*  Покупатель пришел приобретать автомобиль, в том случае если покупатель приобретает автомобиль 
+*  вместе с сигнализацией, то коврики будут в подарок и стоимость автомобиля сокращается на 30 000 руб, 
+*  если покупатель приобретает автомобиль без сигнализации, то стоимость автомобиля полная. 
+*  стоимость автомобиля  - динамическая, в зависимости от комплектации и вводится с консоли
+*  стоимость сигнализации - постоянная , 50 000 руб
+*  стоимость ковриков  - постоянная, 10 000
+*  а) что решил купить покупатель 
+*  б) сколько денег дал покупатель
+*  в) нужна ли сдача и какая или сколько не хватает денег для закрытия сделки
+*/
+
+/*варианты событий 
+ * 
+ */
+
+using System;
+
+using System.Diagnostics.Metrics;
+
+double CarMat = 10000;
+
+double CarAlarm = 50000;
+
+double GiftIStoPurhaseCarAlarm = 30000;
+
+Console.WriteLine("what is the price of the car?");
+
+double CarPrice = Convert.ToDouble(Console.ReadLine());
+
+{
+    Console.WriteLine("Do you want to include the alarm in the price?");
+
+    Console.WriteLine("enter true or false");
+
+    bool CarAlarmBuy;
+
+    CarAlarmBuy = Convert.ToBoolean(Console.ReadLine());
+
+    if (CarAlarmBuy == true)
+    {
+        CarMat = 0;
+
+        Console.WriteLine("You have purchased a car with an alarm system, floor mats are included as a gift");
+
+        double TotalPriceToAlarmOrMat = (CarPrice + CarAlarm + CarMat) - GiftIStoPurhaseCarAlarm;
+
+        Console.WriteLine(TotalPriceToAlarmOrMat + "RUB");
+
+        Console.WriteLine("how much will you pay in cash?");
+
+        double AmountCash = Convert.ToDouble(Console.ReadLine());
+
+        if (AmountCash > TotalPriceToAlarmOrMat)
+        {
+            double change = (TotalPriceToAlarmOrMat - AmountCash);
+
+            change *= -1;
+
+            Console.WriteLine("Your change = " + change);
+
+            return;
+        }
+
+        if (AmountCash == TotalPriceToAlarmOrMat)
+        {
+            Console.WriteLine("Thank you for your purchase");
+
+            return;
+        }
+
+        if (AmountCash < TotalPriceToAlarmOrMat)
+        {
+            while (AmountCash <= TotalPriceToAlarmOrMat)
+            {
+
+                Console.WriteLine("The amount is not enough, deposit the remaining funds");
+
+                Console.WriteLine("You will deposit the remaining funds in cash or on credit");
+
+                Console.WriteLine("Enter cash or credit");
+
+                string payment = Console.ReadLine();
+
+                switch (payment)
+                {
+
+                    case "cash":
+
+                        {
+                            Console.WriteLine("Thank you, please enter the correct amount.");
+
+                            Console.WriteLine("total amount due = " + TotalPriceToAlarmOrMat);
+
+                            break;
+
+                        }
+
+                    case "credit":
+                        {
+                            double BodyCredit = TotalPriceToAlarmOrMat - AmountCash;
+
+                            double CreditInterest = BodyCredit * 0.15 ;
+
+                            Console.WriteLine("credit interest = " + CreditInterest);
+
+                            Console.WriteLine("Сredit amount = " + BodyCredit);
+
+                            Console.WriteLine("choose loan term 1, 3 or 5 years");
+
+                            Console.WriteLine("enter loan term");
+
+                            int LoanTerm = Convert.ToInt32(Console.ReadLine());
+
+                            switch (LoanTerm)
+                            {
+                                case 1:
+
+                                    double InterestPeriod = CreditInterest;
+
+                                    double PaymentPerMonth = (BodyCredit + InterestPeriod) / 12;
+
+                                    Console.WriteLine("payment per month = " + PaymentPerMonth + "RUB");
+
+                                    break;
+
+                                case 3:
+
+                                    double InterestPeriodSecondValue = CreditInterest * 3;
+
+                                    double PaymentPerMonthSecondValue = (BodyCredit + InterestPeriodSecondValue) / 12;
+
+                                    Console.WriteLine("payment per month = " + PaymentPerMonthSecondValue + "RUB");
+
+                                    break;
+
+
+                                case 5:
+
+                                    double InterestPeriodThirdValue = CreditInterest * 5;
+
+                                    double PaymentPerMonthThirdalue = (BodyCredit + InterestPeriodThirdValue) / 12;
+
+                                    Console.WriteLine("payment per month = " + PaymentPerMonthThirdalue + "RUB");
+
+                                    break;
+
+
+                                default:
+
+                                    Console.WriteLine("enter a valid value");
+
+                                    break;
+                            }
+
+                            break;
+
+                        }
+
+
+                    default:
+                        Console.WriteLine("You entered the wrong value.");
+
+                        break;
+
+                }
+
+
+                double MissingAmount = TotalPriceToAlarmOrMat - AmountCash;
+
+                Console.WriteLine("missing amount " + MissingAmount + "RUB");
+
+                return;
+
+            }
+        }
+
+        return;
+    }
+
+    Console.WriteLine("Would you like to add floor mats to your car?");
+
+    Console.WriteLine("enter true or false");
+
+    bool CarMatBuy;
+
+    CarMatBuy = Convert.ToBoolean(Console.ReadLine());
+
+    if (CarMatBuy == true)
+    {
+        Console.WriteLine("You purchased a car and floor mats");
+
+        double TotalPriceAndMat = (CarPrice + CarMat);
+
+        Console.WriteLine(TotalPriceAndMat + "RUB");
+
+        Console.WriteLine("how much will you pay in cash?");
+
+        double AmountCash = Convert.ToDouble(Console.ReadLine());
+
+        if (AmountCash > TotalPriceAndMat)
+        {
+            double change = (TotalPriceAndMat - AmountCash);
+
+            change *= -1;
+
+            Console.WriteLine("Your change = " + change);
+
+            return;
+        }
+
+        if (AmountCash == TotalPriceAndMat)
+        {
+            Console.WriteLine("Thank you for your purchase");
+
+            return;
+        }
+
+        if (AmountCash < TotalPriceAndMat)
+        {
+            while (AmountCash <= TotalPriceAndMat)
+            {
+
+                Console.WriteLine("The amount is not enough, deposit the remaining funds");
+
+                Console.WriteLine("You will deposit the remaining funds in cash or on credit");
+
+                Console.WriteLine("Enter cash or credit");
+
+                string payment = Console.ReadLine();
+
+                switch (payment)
+                {
+
+                    case "cash":
+
+                        {
+                            Console.WriteLine("Thank you, please enter the correct amount.");
+
+                            Console.WriteLine("total amount due = " + TotalPriceAndMat);
+
+                            break;
+
+                        }
+
+                    case "credit":
+                        {
+                            double BodyCredit = TotalPriceAndMat - AmountCash;
+
+                            double CreditInterest = BodyCredit * 0.15;
+
+                            Console.WriteLine("credit interest = " + CreditInterest);
+
+                            Console.WriteLine("Сredit amount = " + BodyCredit);
+
+                            Console.WriteLine("choose loan term 1, 3 or 5 years");
+
+                            Console.WriteLine("enter loan term");
+
+                            int LoanTerm = Convert.ToInt32(Console.ReadLine());
+
+                            switch (LoanTerm)
+                            {
+                                case 1:
+
+                                    double InterestPeriod = CreditInterest;
+
+                                    double PaymentPerMonth = (BodyCredit + InterestPeriod) / 12;
+
+                                    Console.WriteLine("payment per month = " + PaymentPerMonth + "RUB");
+
+                                    break;
+
+                                case 3:
+
+                                    double InterestPeriodSecondValue = CreditInterest * 3;
+
+                                    double PaymentPerMonthSecondValue = (BodyCredit + InterestPeriodSecondValue) / 12;
+
+                                    Console.WriteLine("payment per month = " + PaymentPerMonthSecondValue + "RUB");
+
+                                    break;
+
+
+                                case 5:
+
+                                    double InterestPeriodThirdValue = CreditInterest * 5;
+
+                                    double PaymentPerMonthThirdalue = (BodyCredit + InterestPeriodThirdValue) / 12;
+
+                                    Console.WriteLine("payment per month = " + PaymentPerMonthThirdalue + "RUB");
+
+                                    break;
+
+
+                                default:
+                                    Console.WriteLine("enter a valid value");
+
+                                    break;
+                            }
+
+                            break;
+
+                        }
+
+
+                    default:
+                        Console.WriteLine("You entered the wrong value.");
+
+                        break;
+
+                }
+
+
+                double MissingAmount = TotalPriceAndMat - AmountCash;
+
+                Console.WriteLine("missing amount " + MissingAmount + "RUB");
+
+                return;
+
+            }
+        }
+
+        return;
+
+    }
+      
+
+    Console.WriteLine("you refused to buy floor mats and alarms");
+
+    double TotalPrice = CarPrice;
+
+    Console.WriteLine("how much will you pay in cash?");
+
+    double AmountMoney = Convert.ToDouble(Console.ReadLine());
+
+    if (AmountMoney > TotalPrice)
+    {
+        double change = (TotalPrice - AmountMoney);
+
+        change *= -1;
+
+        Console.WriteLine("Your change = " + change);
+    }
+
+    if (AmountMoney == TotalPrice)
+    {
+        Console.WriteLine("Thank you for your purchase");
+    }
+
+    if (AmountMoney < TotalPrice)
+    {
+        Console.WriteLine("the amount is not enough, deposit the remaining funds");
+
+        double MissingAmount = TotalPrice - AmountMoney;
+
+        Console.WriteLine("missing amount " + MissingAmount + "RUB");
+    }
+
+    else
+    {
+        return;
+    }
+
+}
