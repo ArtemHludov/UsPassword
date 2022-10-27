@@ -33,14 +33,14 @@ for (; MinRange <= MaxRange; MinRange++)
     {
         AmounOddNambers++;
 
-        OddNumbersSum = OddNumbersSum + MinRange;
+        OddNumbersSum += MinRange;
     }
 
     else
     {
         AmounEvenNambers++;
 
-        EvenNumbersSum = EvenNumbersSum + MinRange;
+        EvenNumbersSum += MinRange;
     }
 
 }
