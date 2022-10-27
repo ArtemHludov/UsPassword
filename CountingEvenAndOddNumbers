@@ -1,0 +1,55 @@
+/*
+ * Программа считает количество четных и нечетных чисел в заданном диапозоне 
+ * Так же программа считает сумму четных и нечетны чисел
+ * 
+ * 
+ */
+
+
+uint AmounEvenNambers = 0;
+
+uint AmounOddNambers = 0;
+
+int OddNumbersSum = 0;
+
+int EvenNumbersSum = 0;
+
+
+Console.WriteLine("enter the range");
+
+Console.WriteLine("min range number"); 
+
+int MinRange = int.Parse(Console.ReadLine());
+
+Console.WriteLine("max range number");
+
+int MaxRange = int.Parse(Console.ReadLine());
+
+
+for (; MinRange <= MaxRange; MinRange++)
+{
+
+    if (MinRange % 2 == 0)
+    {
+        AmounOddNambers++;
+
+        OddNumbersSum = OddNumbersSum + MinRange;
+    }
+
+    else
+    {
+        AmounEvenNambers++;
+
+        EvenNumbersSum = EvenNumbersSum + MinRange;
+    }
+
+}
+
+
+Console.WriteLine("AmounEvenNambers = " + AmounEvenNambers);
+
+Console.WriteLine("AmounOddNambers = " + AmounOddNambers);
+
+Console.WriteLine("OddNumbersSum = " + OddNumbersSum);
+
+Console.WriteLine("EvenNumbersSum = " + EvenNumbersSum);
