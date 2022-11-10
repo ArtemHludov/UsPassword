@@ -1,0 +1,88 @@
+/* оргинизуйте ввод массива с консоли
+   организуйте вывод массива в правильном и в обратном порядке
+   посчитайте количество четных и не четных чисел в массиве
+   посчитайте сумму чисел в массиве
+   найдите наименьшее и наибольшее число в массиве
+*/
+
+
+
+int ValueOdd = 0;
+
+int VallueEven = 0;
+
+int SumOddNumbers = 0;
+
+int SumEvenNumbers = 0;
+
+Console.Write("enter amount element :\t");
+
+int AmountElements = int.Parse(Console.ReadLine());
+
+int[] AmountElementsArray = new int [AmountElements];
+
+
+for (int i = 0; i < AmountElementsArray.Length; i++)
+{
+    Console.Write($"\n enter element array {i}:\t ");
+    AmountElementsArray[i] = int.Parse(Console.ReadLine());
+
+    if (AmountElementsArray[i] % 2 == 0)
+    {
+        VallueEven++;
+
+        SumEvenNumbers += AmountElementsArray[i];
+    }
+
+    else
+    {
+        ValueOdd++;
+
+        SumOddNumbers += AmountElementsArray[i];
+    }
+}
+
+Console.WriteLine("\nout put array ");
+
+int MinValue = AmountElementsArray[0];
+
+int MaxValue = AmountElementsArray[0];
+
+for (int i = 1; i < AmountElementsArray.Length; i++)
+{
+    if (AmountElementsArray[i] < MinValue)
+    {
+        MinValue = AmountElementsArray[i];
+    }
+
+    else
+    {
+        MaxValue = AmountElementsArray[i];
+    }
+}
+
+for (int i = 0; i < AmountElementsArray.Length; i++)
+{   
+    Console.WriteLine(AmountElementsArray[i]);
+}
+
+Console.WriteLine("\nRevers order array: ");
+
+for (int i = AmountElementsArray.Length - 1; i >= 0; i--)
+{
+    Console.WriteLine(AmountElementsArray[i]);
+}
+
+Console.WriteLine("\n\nAmount even numbers = " + VallueEven);
+
+Console.WriteLine("\nAmount odd numbers = " + ValueOdd);
+
+Console.WriteLine("\nSum even numbers " + SumEvenNumbers);
+
+Console.WriteLine("\nSum odd numbers " + SumOddNumbers);
+
+Console.WriteLine("\nMin value " + MinValue);
+
+Console.WriteLine("\nMax value " + MaxValue);
+
+Console.ReadLine();
