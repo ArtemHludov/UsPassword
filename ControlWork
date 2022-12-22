@@ -1,0 +1,289 @@
+/*  
+ * - У нас имеется магазин .
+ * - Мы подводим итог рабочего дня и заносим данные в таблицу
+ * - определяем, сколько человек пришло за сегодня и заносим данные по каждому человеку в массив 
+ * - Мы делаем рекламу поэтому не хотим узнать, с какого канала продаж приходят покупатели. 
+ * - Так же мы принимаю оплату наличными, картами и в кредит. 
+ * - При разных количествах купленного товара, цена будет разная 
+ * - В итоге должно быть. Сколько человек пришло за день. Данные каждого человека. С какого канала продаж он пришел.
+ * Что купил, как оплатили и на какую сумму каждый человек. 
+ */
+
+using System;
+
+
+Console.Write("Amount  buyer in shop\t");
+
+int AmountBuyer = int.Parse(Console.ReadLine());
+
+string[] CustomerName = new string[AmountBuyer];
+
+string[] WhatADPutToUse = new string[AmountBuyer]; //какой рекламой воспользовался покупатель
+
+string[] WhatProductPutTouse = new string[AmountBuyer]; //какой товар купил покупатель
+
+int[] AmountProductPutToUse = new int[AmountBuyer]; //количество купленного товара покупателем
+
+int[] SumBuy = new int[AmountBuyer];  // сумма купленных товаров одним покупателем
+
+string[] WhatBuyBuyer = new string[AmountBuyer];  //что купил данный покупатель
+
+int CountAdvertisingBaner = 0;
+
+int CountAdvertisingLeaflets = 0;
+
+int CountNOAdvartising = 0;
+
+int CountPayCash = 0;
+
+int CountPayCart = 0;
+
+int CountPayCredit = 0;
+
+int CountLostData = 0;
+
+int SumCashInCashRegister = 0;
+
+string[] WhatADArray = new string[]
+{
+     "рекламный банер",
+     "листовки",
+     "без рекламы"
+};
+
+string[] ProductName = new string[]
+{
+    "ручка",
+    "пенал",
+    "карандаш",
+    "тетрадь"
+};
+
+for (int i = 0; i < CustomerName.Length; i++)
+{   
+    Console.Write($"\nenter name buyer {i+1}" + CustomerName[i] + "\t");
+
+    CustomerName[i] = Console.ReadLine();
+
+    Console.WriteLine("\nС какой рекламы пришел покупатель " + CustomerName[i]);
+
+    Console.Write("\n1 - " + WhatADArray[0] + "\t2 - " + WhatADArray[1] + "\t3 - " + WhatADArray[2]);
+
+    Console.Write("\ntap to enter if data lost\n");
+
+    Console.Write("\nвведите нужное значение: ");
+
+    string WhatAD = Console.ReadLine();
+
+    switch (WhatAD)
+    {
+       case "1":
+           Console.WriteLine("\nпокупатель " + CustomerName[i] + " пришел с рекламного банера");
+
+            WhatADPutToUse[i] = WhatADArray[0];
+
+           CountAdvertisingBaner++;
+           break;
+
+        case "2":
+           Console.WriteLine("\nпокупатель " + CustomerName[i] + " пришел с листовки");
+
+           CountAdvertisingLeaflets++;
+
+           WhatADPutToUse[i] = WhatADArray[1];
+            break;
+
+        case "3":
+           Console.WriteLine("\nпокупатель " + CustomerName[i] + " был постоянным покупателем");
+
+            WhatADPutToUse[i] = WhatADArray[2];
+
+            CountNOAdvartising++;
+           break;
+
+        default:
+
+            if (Console.ReadKey().Key == ConsoleKey.Enter ) 
+                CountLostData++;
+            break;             
+    }
+
+    
+    Console.WriteLine("\nчто купил " + CustomerName[i]);
+
+    Console.WriteLine(" 1 - " + ProductName[0] + " 2 - " + ProductName[1] + " 3 - " + ProductName[2] + " 4 - " + ProductName[3] + "\n");
+
+    Console.Write("введите нужное значение: ");
+
+    string BoughtProduct = Console.ReadLine();
+
+    Console.WriteLine();
+
+    Console.Write("Введите количество товара приобретенного покупателем " + CustomerName[i] + "\t");
+
+    int AmountBuyProduct = int.Parse(Console.ReadLine());
+
+    AmountProductPutToUse[i] = AmountBuyProduct;
+
+    int[] ProductPrice = new int[ProductName.Length];
+    for (int f = 0; f < ProductName.Length; f++)
+    {
+        for (int t = 0; t < ProductPrice.Length; t++)
+        {
+            if (AmountBuyProduct < 10)
+            {
+                ProductPrice[0] = 4;
+
+                ProductPrice[1] = 4;
+
+                ProductPrice[2] = 4;
+
+                ProductPrice[3] = 4;
+            }
+
+            else
+            {
+                ProductPrice[0] = 2;
+
+                ProductPrice[1] = 2;
+
+                ProductPrice[2] = 2;
+
+                ProductPrice[3] = 2;
+            }
+        }
+    }
+
+    Console.WriteLine();
+
+    switch (BoughtProduct)
+    {
+        case "1":
+            Console.WriteLine("\nпокупатель " + CustomerName[i] + " купил товар: ручка гелевая   в количестве " + AmountBuyProduct + "шт");
+
+            WhatBuyBuyer[i] = ProductName[0];
+
+            SumBuy[i] = AmountBuyProduct * ProductPrice[i] ;
+
+            Console.WriteLine("сумма покупки " + SumBuy[i] + "$");
+            
+            WhatProductPutTouse[i] = ProductName[0];
+            break;
+
+        case "2":
+            Console.WriteLine("\nпокупатель " + CustomerName[i] + " купил товар: пенал   в количестве " + AmountBuyProduct + "шт");
+
+            WhatBuyBuyer[i] = ProductName[1];
+
+            SumBuy[i] = AmountBuyProduct * ProductPrice[i];
+
+            Console.WriteLine("сумма покупки " + SumBuy[i] + "$");
+
+            WhatProductPutTouse[i] = ProductName[1];
+            break;
+
+        case "3":
+            Console.WriteLine("\nпокупатель " + CustomerName[i] + " купил товар: карандаш   в количестве " + AmountBuyProduct + "шт");
+
+            WhatBuyBuyer[i] = ProductName[2];
+
+            SumBuy[i] = AmountBuyProduct * ProductPrice[i];
+
+            Console.WriteLine("сумма покупки " + SumBuy[i] + "$");
+
+            WhatProductPutTouse[i] = ProductName[2];
+            break;
+
+        case "4":
+            Console.WriteLine("\nпокупатель " + CustomerName[i] + " купил товар: тетрадь    в количестве " + AmountBuyProduct + "шт");
+
+            WhatBuyBuyer[i] = ProductName[3];
+
+            SumBuy[i] = AmountBuyProduct * ProductPrice[i];
+
+            Console.WriteLine("сумма покупки " + SumBuy[i] + "$");
+
+            WhatProductPutTouse[i] = ProductName[3];
+            break;
+
+        default:
+
+            break;
+    }
+
+    bool WhileIsWork = true;
+
+    while (WhileIsWork == true)
+    {
+        Console.WriteLine("\nКак произвел оплату покупатель   " + CustomerName[i]);
+
+        Console.WriteLine("введите: 1 - оплатил покупку картой,  2 - оплатил покупку наличными,  3 - оплатил покупку в кредит\n");
+
+        string PayBuyer = Console.ReadLine();
+
+        switch (PayBuyer)
+        {
+            case "1":
+                Console.WriteLine("\nпокупатель " + CustomerName[i] + " оплатил покупку картой");
+
+                CountPayCart++;
+
+
+                WhileIsWork = false;
+                break;
+
+            case "2":
+                Console.WriteLine("\nпокупатель " + CustomerName[i] + " оплатил покупки наличными");
+
+                CountPayCash++;
+
+                WhileIsWork = false;
+                break;
+
+            case "3":
+                Console.WriteLine("\nпокупатель " + CustomerName[i] + " оплатил покупку в кредит");
+
+                CountPayCredit++;
+
+                WhileIsWork = false;
+                break;
+
+            default:
+                Console.WriteLine("enter correct value");
+
+                WhileIsWork = true;
+                break;
+        }
+    }
+
+    SumCashInCashRegister += SumBuy[i];
+
+    WhileIsWork ^= WhileIsWork;
+
+}
+
+Console.WriteLine("==============================================================================");
+
+Console.WriteLine("отчет сформирован " + DateTime.Today);
+
+Console.Write("в течении дня магазин посетили " + AmountBuyer + " и совершили покупки на сумму = "+ SumCashInCashRegister + "$");
+
+Console.WriteLine("из них: " + CountPayCash + "оплатили нличными"  + CountPayCart + "оплатили картой" + CountPayCredit  + "купили в кредит");
+
+Console.WriteLine();
+
+for (int i = 0; i < AmountBuyer; i++)
+{
+    string indexbaybauer = WhatBuyBuyer[i];
+
+    Console.WriteLine(CustomerName[i] + " купил " + indexbaybauer + AmountProductPutToUse + "шт" + " на сумму " + SumBuy[i]);
+
+    Console.WriteLine("Buyer put to use " + WhatProductPutTouse[i] + " and use to AD " + WhatADPutToUse[i]);
+
+    Console.WriteLine();
+}
+
+
+Console.WriteLine("exit");
+Console.ReadLine();
+
